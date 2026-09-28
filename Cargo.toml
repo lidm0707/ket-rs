@@ -1,0 +1,24 @@
+[package]
+name = "ket-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+katgpt-core = { git = "https://github.com/lidm0707/katgpt-rs", default-features = false, optional = true, features = [
+    "salience_tri_gate",
+    "indicator_probe_bank",
+    "best_belief",
+    "smooth_min_similarity",
+    "conformal_predictive_intervals",
+    "heal_validation",
+    "manifold_bandit",
+] }
+katgpt-sense = { git = "https://github.com/lidm0707/katgpt-rs", default-features = false, optional = true, features = [
+    "sector_projection",
+] }
+fastrand = { version = "2", optional = true }
+
+[features]
+default = ["ket"]
+ket = ["dep:katgpt-core", "dep:katgpt-sense", "dep:fastrand"]
+ket_conformal = ["ket"]
