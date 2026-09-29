@@ -1,3 +1,5 @@
+#![allow(clippy::unwrap_used)]
+
 use super::*;
 
 const DIMS: [f32; STATE_DIM] = [0.1, -0.2, 0.3, 0.4, 0.0, 0.0];

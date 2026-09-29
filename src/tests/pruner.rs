@@ -1,3 +1,5 @@
+#![allow(clippy::unwrap_used)]
+
 use super::*;
 
 const CHOICES: [ChoiceId; 3] = [ChoiceId(0), ChoiceId(1), ChoiceId(2)];

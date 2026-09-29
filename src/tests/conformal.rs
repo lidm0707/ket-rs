@@ -1,3 +1,5 @@
+#![allow(clippy::unwrap_used)]
+
 use super::*;
 
 /// Deterministic fixture: smooth seasonal signal with mild noise.
