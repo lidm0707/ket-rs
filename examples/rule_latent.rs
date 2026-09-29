@@ -47,6 +47,21 @@ impl Class {
 }
 
 /// Evidence dim per class (context dims follow at CLASS_COUNT + n).
+///
+/// Latent layout has two zones:
+///
+/// ```text
+/// index:  0      1      2       3
+///        [meal] [fruit] [sweet] [hot]
+///         \----- class -----/ \ context /
+/// ```
+///
+/// - Class zone `[0..CLASS_COUNT)` — compete via argmax in `classify`.
+/// - Context zone `[CLASS_COUNT..]` — traits (sweet, hot) that support but
+///   never compete with a class.
+///
+/// Deriving offsets from `CLASS_COUNT` instead of hardcoding them keeps the
+/// layout valid when a new `Class` variant shifts every context dim right.
 const CLASS_COUNT: usize = 2;
 const DIM_MEAL: usize = 0;
 const DIM_FRUIT: usize = 1;

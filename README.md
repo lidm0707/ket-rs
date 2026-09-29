@@ -59,6 +59,34 @@ The example defines two classes (`Meal`, `Fruit`) and six keyword rules:
 Dims `0..CLASS_COUNT` are class evidence; the rest are context dims that the
 scorer's sector projection consumes.
 
+## katgpt upstream
+
+All primitives come from the [katgpt-rs](https://github.com/katopz/katgpt-rs)
+project — this crate is a thin domain layer over it:
+
+- [`katgpt-core`](https://github.com/katopz/katgpt-rs) — `SalienceTriGate`,
+  probe banks, best-belief, conformal intervals, bandit, heal validation
+  (gated by the feature flags in `Cargo.toml`).
+- [`katgpt-sense`](https://github.com/katopz/katgpt-rs) — `sector_projection`
+  used by `KetScorer`.
+
+Add ket-rs to your own project:
+
+```toml
+[dependencies]
+ket-rs = { git = "https://github.com/katopz/katgpt-rs", directory = "ket-rs" }
+```
+
+Or depend on the substrate directly:
+
+```toml
+[dependencies]
+katgpt-core = { git = "https://github.com/katopz/katgpt-rs" }
+katgpt-sense = { git = "https://github.com/katopz/katgpt-rs" }
+```
+
+See the upstream repo for the full primitive API and feature list.
+
 ## Core API surface
 
 | Module      | Types                                       | Role                                    |
@@ -83,6 +111,15 @@ let verdict = engine.decide_into(query, &mut choices_out, &mut scores_out);
 
 Note the zero-copy style: `LatentState` and `KetQuery` borrow the latent
 slices, and `decide_into` writes into caller-provided output buffers.
+
+## Docs
+
+- [docs/TUTORIAL.en.md](docs/TUTORIAL.en.md) — English walkthrough of the full
+  computation: encode → argmax → sector projection → emit gate.
+- [docs/TUTORIAL.th.md](docs/TUTORIAL.th.md) — Thai walkthrough (ฉบับภาษาไทย)
+  of the same computation.
+- [katgpt-rs on GitHub](https://github.com/katopz/katgpt-rs) — upstream
+  substrate (`katgpt-core`, `katgpt-sense`) used by every module.
 
 ## Modules
 

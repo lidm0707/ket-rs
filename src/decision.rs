@@ -45,11 +45,18 @@ pub struct DecisionPlan {
 }
 
 impl KetEngine {
-    /// Returns None only if the urgency bank fails to construct (unreachable
-    /// with ket's committed consts).
+    /// Creates the engine over the default rule bank
+    /// ([`crate::score`]). Returns None only if the urgency bank fails to
+    /// construct (unreachable with ket's committed consts).
     pub fn new() -> Option<Self> {
+        Self::with_scorer(KetScorer::new())
+    }
+
+    /// Creates the engine over a custom scorer — use [`KetScorer::builder`]
+    /// to override the default rules.
+    pub fn with_scorer(scorer: KetScorer) -> Option<Self> {
         Some(Self {
-            scorer: KetScorer::new(),
+            scorer,
             probe: UrgencyProbe::new(),
             detector: KetConflictDetector,
         })

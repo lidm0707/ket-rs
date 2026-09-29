@@ -38,3 +38,18 @@ fn gate_is_ternary() {
         SalienceDecision::Delegate(ChoiceId(3))
     ));
 }
+
+#[test]
+fn builder_overrides_default_rules() {
+    let dims = [0.0, 5.0, 0.0, 0.0];
+    let mut custom = KetScorer::builder()
+        .sector(
+            Sector::Safety,
+            [(Dim::DelegateAxis, Sign::Push), (Dim::Support, Sign::Push)],
+        )
+        .build();
+    // Default Safety reads SpeakAxis/Resist — dim1 is neutral there (~0.5);
+    // the override makes DelegateAxis push Safety hard.
+    assert!(custom.project(&dims)[0] > 0.9);
+    assert!(KetScorer::new().project(&dims)[0] < 0.6);
+}
