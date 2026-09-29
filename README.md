@@ -45,6 +45,27 @@ hot rice and curry: -> meal because ["cooked-staple", "served-hot"] ...
 a raw sweet banana: -> fruit because ["raw-fruit", "sweet-profile", "eaten-raw"] ...
 ```
 
+## Example: `examples/gate_chat_bank_2level.rs` (web chat)
+
+A dioxus-web customer-reply chatbot — "Susutaku-chan" — driven by the same
+rules → latent → decision pipeline, but with a **two-level quest flow**
+(Welcome routes into Billing / Technical; each bot turn ends with a question
+and waits). It also shows two extras the CLI example doesn't have:
+
+- **Grammar side channel** — 19 rules append polite "📖 Grammar tip" fixes to
+  the reply without touching the routing dims.
+- **Inspectable gate** — every reply prints its fired rules and gate score,
+  and the gate can reject, in which case the bot says so instead of
+  improvising.
+
+```sh
+dx serve --example gate_chat_bank_2level --platform web
+```
+
+Requires the `web` feature (enabled automatically by the example's
+`required-features`). Details: [docs/GATE_CHAT_BANK_2LEVEL.en.md](docs/GATE_CHAT_BANK_2LEVEL.en.md)
+/ [ภาษาไทย](docs/GATE_CHAT_BANK_2LEVEL.th.md).
+
 ## Example: `examples/rule_latent.rs`
 
 The example defines two classes (`Meal`, `Fruit`) and six keyword rules:
@@ -124,6 +145,10 @@ slices, and `decide_into` writes into caller-provided output buffers.
   computation: encode → argmax → sector projection → emit gate.
 - [docs/TUTORIAL.th.md](docs/TUTORIAL.th.md) — Thai walkthrough (ฉบับภาษาไทย)
   of the same computation.
+- [docs/GATE_CHAT_BANK_2LEVEL.en.md](docs/GATE_CHAT_BANK_2LEVEL.en.md) — the
+  web chat example: two-level quest flow, cue banks, grammar side channel.
+- [docs/GATE_CHAT_BANK_2LEVEL.th.md](docs/GATE_CHAT_BANK_2LEVEL.th.md) — Thai
+  version of the web chat example doc.
 - [katgpt-rs on GitHub](https://github.com/katopz/katgpt-rs) — upstream
   substrate (`katgpt-core`, `katgpt-sense`) used by every module.
 
@@ -145,3 +170,5 @@ slices, and `decide_into` writes into caller-provided output buffers.
 
 - `ket` (default) — core engine (`katgpt-core`, `katgpt-sense`, `fastrand`)
 - `ket_conformal` — adds conformal predictive intervals
+- `web` — dioxus-web frontend (implies `ket`); required by the
+  `gate_chat_bank_2level` example
