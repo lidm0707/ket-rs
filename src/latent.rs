@@ -5,7 +5,7 @@
 //! (heal_validation, default-on upstream, GOAT-passed Issue 133).
 
 /// Fixed state dimensionality for all ket banks and projections.
-pub const STATE_DIM: usize = 4;
+pub const STATE_DIM: usize = 6;
 
 pub const FLAG_ARMED: u8 = 1 << 0;
 pub const FLAG_SAFE: u8 = 1 << 1;

@@ -16,7 +16,7 @@ fn query<'a>(state: &'a LatentState<'a>, keywords: &'a [&'a str]) -> KetQuery<'a
 
 #[test]
 fn g1_determinism_bit_identical() {
-    let dims = [0.6, 0.2, 0.1, 0.0];
+    let dims = [0.6, 0.2, 0.1, 0.0, 0.0, 0.0];
     let kw = ["risk"];
     let mut e1 = KetEngine::new().unwrap();
     let mut e2 = KetEngine::new().unwrap();
@@ -41,7 +41,7 @@ fn g1_determinism_bit_identical() {
 
 #[test]
 fn rejects_conflicted_state() {
-    let dims = [f32::NAN, 0.0, 0.0, 0.0];
+    let dims = [f32::NAN, 0.0, 0.0, 0.0, 0.0, 0.0];
     let kw = ["risk"];
     let mut e = KetEngine::new().unwrap();
     let state = LatentState {
@@ -60,7 +60,7 @@ fn rejects_conflicted_state() {
 #[test]
 fn hot_path_is_buffer_only() {
     // Fixed stack buffers only — structurally zero-alloc by signature.
-    let dims = [0.6, 0.2, 0.1, 0.0];
+    let dims = [0.6, 0.2, 0.1, 0.0, 0.0, 0.0];
     let kw = ["deadline"];
     let mut e = KetEngine::new().unwrap();
     let state = LatentState {
@@ -76,7 +76,7 @@ fn hot_path_is_buffer_only() {
 
 #[test]
 fn urgency_flows_through() {
-    let dims = [5.0, 0.0, 0.0, 0.0];
+    let dims = [5.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     let kw = ["urgent"];
     let mut e = KetEngine::new().unwrap();
     let state = LatentState {
@@ -91,7 +91,7 @@ fn urgency_flows_through() {
 
 #[test]
 fn score_question_uses_full_bank() {
-    let dims = [0.6, 0.2, 0.1, 0.0];
+    let dims = [0.6, 0.2, 0.1, 0.0, 0.0, 0.0];
     let mut e = KetEngine::new().unwrap();
     let mut c = [SENTINEL; 3];
     let mut s = [0.0; 3];

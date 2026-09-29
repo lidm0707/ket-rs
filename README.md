@@ -1,5 +1,7 @@
 # ket-rs
 
+> GitHub: [katgpt-rs](https://github.com/katopz/katgpt-rs)
+
 Rules → latent → decision, with **no training and no hand-coded dims**.
 
 `ket-rs` turns symbolic rules over text into a small evidence vector (the
@@ -114,6 +116,10 @@ slices, and `decide_into` writes into caller-provided output buffers.
 
 ## Docs
 
+- [docs/OVERVIEW.en.md](docs/OVERVIEW.en.md) — plain-language conceptual
+  overview of every module (what it does and why).
+- [docs/OVERVIEW.th.md](docs/OVERVIEW.th.md) — Thai conceptual overview
+  (ภาพรวมเชิงนามธรรม ฉบับภาษาไทย).
 - [docs/TUTORIAL.en.md](docs/TUTORIAL.en.md) — English walkthrough of the full
   computation: encode → argmax → sector projection → emit gate.
 - [docs/TUTORIAL.th.md](docs/TUTORIAL.th.md) — Thai walkthrough (ฉบับภาษาไทย)

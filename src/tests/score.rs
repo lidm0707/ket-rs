@@ -3,7 +3,7 @@ use crate::question::ChoiceId;
 
 #[test]
 fn projection_is_deterministic() {
-    let dims = [0.6, 0.2, 0.1, 0.0];
+    let dims = [0.6, 0.2, 0.1, 0.0, 0.0, 0.0];
     let mut s = KetScorer::new();
     let a = s.project(&dims);
     let b = s.project(&dims);
@@ -22,9 +22,9 @@ fn domain_score_averages_span() {
 #[test]
 fn gate_is_ternary() {
     let s = KetScorer::new();
-    let loud = [5.0, 5.0, 5.0, 5.0];
-    let quiet = [-5.0, -5.0, -5.0, -5.0];
-    let speakish = [1.0, 0.0, 0.0, 0.0];
+    let loud = [5.0, 5.0, 5.0, 5.0, 5.0, 5.0];
+    let quiet = [-5.0, -5.0, -5.0, -5.0, -5.0, -5.0];
+    let speakish = [1.0, 0.0, 0.0, 0.0, 0.0, 0.0];
     assert!(matches!(
         s.gate(&speakish, ChoiceId(0)),
         SalienceDecision::Speak
@@ -41,7 +41,7 @@ fn gate_is_ternary() {
 
 #[test]
 fn builder_overrides_default_rules() {
-    let dims = [0.0, 5.0, 0.0, 0.0];
+    let dims = [0.0, 5.0, 0.0, 0.0, 0.0, 0.0];
     let mut custom = KetScorer::builder()
         .sector(
             Sector::Safety,

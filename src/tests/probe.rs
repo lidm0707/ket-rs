@@ -13,13 +13,13 @@ fn calm_state_is_routine() {
 
 #[test]
 fn hot_state_is_critical() {
-    let dims = [5.0_f32, 0.0, 0.0, 0.0];
+    let dims = [5.0_f32, 0.0, 0.0, 0.0, 0.0, 0.0];
     assert_eq!(UrgencyProbe::new().unwrap().tag(&dims), Urgency::Critical);
 }
 
 #[test]
 fn warm_state_is_elevated() {
-    let dims = [0.0_f32, 3.0, 0.0, 0.0];
+    let dims = [0.0_f32, 3.0, 0.0, 0.0, 0.0, 0.0];
     assert_eq!(UrgencyProbe::new().unwrap().tag(&dims), Urgency::Elevated);
 }
 

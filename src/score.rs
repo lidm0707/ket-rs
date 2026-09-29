@@ -26,6 +26,8 @@ pub enum Dim {
     DelegateAxis = 1,
     Support = 2,
     Resist = 3,
+    CoinX = 4,
+    CoinY = 5,
 }
 
 impl Dim {
@@ -78,6 +80,8 @@ const fn rule(sector: Sector, pushes: [(Dim, Sign); PUSHES_PER_SECTOR]) -> Secto
 /// Time: DelegateAxis + Support push.
 /// Resource: DelegateAxis + Resist push.
 /// General: SpeakAxis resists, Support pushes.
+/// Resource: loot geometry — the signed coin direction (CoinX, CoinY)
+/// pushes Resource, so coin bearing shifts the domain score directionally.
 const SECTOR_RULES: [SectorRule; SECTOR_COUNT] = [
     rule(
         Sector::Safety,
@@ -89,7 +93,7 @@ const SECTOR_RULES: [SectorRule; SECTOR_COUNT] = [
     ),
     rule(
         Sector::Resource,
-        [(Dim::DelegateAxis, Sign::Push), (Dim::Resist, Sign::Push)],
+        [(Dim::CoinX, Sign::Push), (Dim::CoinY, Sign::Push)],
     ),
     rule(
         Sector::General,

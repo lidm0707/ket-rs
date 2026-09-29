@@ -17,6 +17,7 @@ katgpt-sense = { git = "https://github.com/lidm0707/katgpt-rs", default-features
     "sector_projection",
 ] }
 fastrand = { version = "2", optional = true }
+bevy = "0.19.1"
 
 [features]
 default = ["ket"]

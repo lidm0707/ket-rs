@@ -11,9 +11,9 @@ use crate::question::Urgency;
 /// Probe direction rows, one per urgency level (Routine, Elevated, Critical),
 /// flattened row-major for the upstream bank constructor.
 const PROBE_DIRECTIONS_FLAT: [f32; 3 * STATE_DIM] = [
-    0.1, 0.1, 0.1, 0.1, // Routine
-    0.5, 0.2, 0.1, 0.0, // Elevated
-    0.9, 0.1, 0.0, -0.2, // Critical
+    0.1, 0.1, 0.1, 0.1, 0.0, 0.0, // Routine
+    0.5, 0.2, 0.1, 0.0, 0.2, 0.2, // Elevated
+    0.9, 0.1, 0.0, -0.2, 0.0, 0.0, // Critical
 ];
 
 /// Sigmoid-input thresholds per label; a label fires above its threshold.
